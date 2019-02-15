@@ -129,9 +129,10 @@ def is_prime(n):
 #
 #window=rg.RoseWindow
 def draw_a_picture(point1, n, color, window):
+    point2=rg.Point(point1.x-80,point1.y-40)
     circle=rg.Circle(point1,100)
-    botrightcorn= rg.Point(point1.x +160, point1.y +80)
-    rect=rg.Rectangle(point1,botrightcorn)
+    botrightcorn= rg.Point(point2.x +160, point2.y +80)
+    rect=rg.Rectangle(point2,botrightcorn)
     window.render(0.5)
     circle.attach_to(window)
     rect.attach_to(window)
@@ -139,12 +140,12 @@ def draw_a_picture(point1, n, color, window):
     total=1
     for k in range(n+1):
         p1 = rect.get_upper_left_corner()
-        end = (p1.x + (160 / total) * k, p1.y)
-        line=(point1,end)
+        end = rg.Point(p1.x + (total-1+160/n)*k, p1.y)
+        line=rg.Line(point1,end)
         if is_prime(n)==True:
-            line_color = "Orange"
+            line.line_color = 'Orange'
         else:
-            line_color = color
+            line.line_color = color
         line.attach_to(window)
     total = total + 1
     return total
